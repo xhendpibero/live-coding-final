@@ -8,14 +8,18 @@ export default function Header() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const langParams = searchParams.get('lang') || 'id'
-  const brandParams = searchParams.get('brand') || ''
   const { theme } = useTheme()
 
   const changeLang = (lang: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.set('lang', lang)
-    if (brandParams) {
-      params.set('brand', brandParams)
+    // Preserve theme parameter if it exists
+    const themeParam = searchParams.get('theme')
+    const brandParam = searchParams.get('brand')
+    if (themeParam) {
+      params.set('theme', themeParam)
+    } else if (brandParam) {
+      params.set('brand', brandParam)
     }
     window.location.href = `${pathname}?${params.toString()}`
   }

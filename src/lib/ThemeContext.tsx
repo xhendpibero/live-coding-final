@@ -16,7 +16,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams()
-  const brandParams = searchParams.get('brand') || ''
+  const brandParams = searchParams.get('theme') || ''
   const langParams = searchParams.get('lang') || 'id'
 
   const { data: theme, isLoading, error } = useQuery({
